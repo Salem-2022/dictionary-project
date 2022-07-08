@@ -1,10 +1,26 @@
+import React, { useState } from "react";
+import axios from "axios";
 import "./Dictionary.css";
 
 export default function Dictionary() {
+  let [searchedWord, setSearchedWord] = useState("");
+  function handleResponse(response) {
+    console.log(response.data[0]);
+  }
+
+  function formSubmit(event) {
+    event.preventDefault();
+    let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`;
+    axios.get(apiUrl).then(handleResponse);
+    return "searching";
+  }
+  function updateSearchedWord(event) {
+    setSearchedWord(event.target.value);
+  }
   return (
     <div className="Dictionary">
-      <form>
-        <input type="search" />
+      <form onSubmit={formSubmit}>
+        <input type="search" onChange={updateSearchedWord} />
         <button className="searchButton">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,6 +34,7 @@ export default function Dictionary() {
           </svg>
         </button>
       </form>
+      <p>The recently searched word is {searchedWord}</p>
     </div>
   );
 }
