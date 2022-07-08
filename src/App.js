@@ -1,4 +1,5 @@
 import logo from "./logo.jpg";
+import Dictionary from "./Dictionary";
 import "./App.css";
 
 export default function App() {
@@ -7,10 +8,11 @@ export default function App() {
       <header className="App-header">
         <img
           src={logo}
-          className="img-fluid rounded mt-5"
+          className="img-fluid mb-4 rounded mt-5"
           width="100"
           alt="logo"
         />
+        <Dictionary />
       </header>
     </div>
   );
