@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ResponseData from "./ResponseData";
 import "./Dictionary.css";
 
 export default function Dictionary() {
   let [searchedWord, setSearchedWord] = useState("");
+  let [responseData, setResponseData] = useState("");
+
   function handleResponse(response) {
-    console.log(response.data[0]);
+    setResponseData(response.data[0]);
   }
 
   function formSubmit(event) {
@@ -34,6 +37,8 @@ export default function Dictionary() {
           </svg>
         </button>
       </form>
+
+      <ResponseData responseData={responseData} />
       <p>The recently searched word is {searchedWord}</p>
     </div>
   );
