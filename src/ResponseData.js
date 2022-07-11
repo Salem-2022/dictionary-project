@@ -1,5 +1,6 @@
 import React from "react";
 import Meaning from "./meaning";
+import Synonym from "./Synonym";
 
 export default function ResponseData(props) {
   //let firstLetterCapital = props.responseData.word.charAt(0).toUpperCase();
@@ -12,6 +13,7 @@ export default function ResponseData(props) {
           return (
             <div key={index}>
               <Meaning meaning={meaning} />
+              <Synonym synonym={meaning.synonyms} />
             </div>
           );
         })}

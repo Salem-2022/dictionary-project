@@ -8,6 +8,7 @@ export default function Dictionary() {
   let [responseData, setResponseData] = useState("");
 
   function handleResponse(response) {
+    console.log(response.data[0]);
     setResponseData(response.data[0]);
   }
 
@@ -23,7 +24,11 @@ export default function Dictionary() {
   return (
     <div className="Dictionary">
       <form onSubmit={formSubmit}>
-        <input type="search" onChange={updateSearchedWord} />
+        <input
+          type="search"
+          onChange={updateSearchedWord}
+          placeholder="Search for a word"
+        />
         <button className="searchButton">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +44,6 @@ export default function Dictionary() {
       </form>
 
       <ResponseData responseData={responseData} />
-      <p>The recently searched word is {searchedWord}</p>
     </div>
   );
 }
