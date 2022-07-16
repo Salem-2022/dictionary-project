@@ -1,9 +1,13 @@
 .Dictionary {
-  text-align: center;
+  text-align: left;
+  max-width: 70%;
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
   
-
 }
-.searchButton {
-  border-radius: 4 px;
-  border: 1px solid #f8f9fa;
+
+.Dictionary input{
+  max-width:70%;
+  margin: 0 auto;
+  height: 40px;
 }

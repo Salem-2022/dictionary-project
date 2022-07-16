@@ -4,23 +4,42 @@ import Synonym from "./Synonym";
 import Phonetics from "./Phonetics";
 
 export default function ResponseData(props) {
-  //let firstLetterCapital = props.responseData.word.charAt(0).toUpperCase();
-  //let restLettersLower = props.responseData.word.slice(1).toLowerCase();
+
   if (props.responseData) {
-    
+
     return (
-      <div className="ResponseData">
-        <h2>{props.responseData.word}</h2>
+      <div className="container ResponseData">
+        <div className="row">
+        <div className="col">
+        <h2 className="text-capitalize text-center display-2 font-weight-bold">{props.responseData.word}</h2>
         <Phonetics phonetics={props.responseData.phonetics}/>
+      </div>
+      </div>
+      
+      
         {props.responseData.meanings.map(function (meaning, index) {
-          return (
+          return ( 
             <div key={index}>
-              <Meaning meaning={meaning} />
+              
+            <div className="row">
+            <div className="col border rounded">
+            
+           
+            <Meaning meaning={meaning} />
+              <br />
               <Synonym synonym={meaning.synonyms} />
+              <br />
+             
             </div>
+
+            </div>
+            
+          </div>
+          
           );
         })}
       </div>
+      
     );
   } else {
     return null;

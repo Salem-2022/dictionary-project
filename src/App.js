@@ -9,10 +9,11 @@ export default function App() {
         <img
           src={logo}
           className="img-fluid mb-4 rounded mt-5"
-          width="100"
+          width="80"
           alt="logo"
         />
         <Dictionary />
+        
       </header>
     </div>
   );
