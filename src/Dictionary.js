@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ResponseData from "./ResponseData";
+import Photos from "./Photos";
 
 
 
@@ -11,17 +12,25 @@ export default function Dictionary() {
   let [searchedWord, setSearchedWord] = useState("Flower");
   let [responseData, setResponseData] = useState("");
   let [loaded, setLoaded] = useState(false);
+  let [photos, setPhotos] = useState("");
 
-  function handleResponse(response) {
+  
+  function handleDictionaryResponse(response) {
     
     setResponseData(response.data[0]);
-   
     
   }
-  
+  function handlePexelResponse(response){
+    setPhotos(response.data.photos);
+  }
 function search(){
   let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`;
-    axios.get(apiUrl).then(handleResponse);
+    axios.get(apiUrl).then(handleDictionaryResponse);
+    
+    let pexelApiKey="563492ad6f917000010000018264f965bdbf4f75b908a0fafc52414e";
+    let pexelApiUrl=`https://api.pexels.com/v1/search?query=${searchedWord}&per_page=9`;
+    let headers={"Authorization" : `Bearer ${pexelApiKey}`};
+    axios.get(pexelApiUrl,{ headers:headers}).then(handlePexelResponse);
     return "searching";
 }
   function formSubmit(event) {
@@ -56,8 +65,9 @@ function search(){
       </form>
 
       <ResponseData responseData={responseData} />
+      <Photos photos={photos} />
      
-      <p className="text-center">Coded by Eyerusalem Birru, <a href="https://github.com/Salem-2022/dictionary-project">open source code</a></p>
+      <p className="text-center">Coded by Eyerusalem Birru, <a href="https://github.com/Salem-2022/dictionary-project" rel="noreferrer">open source code</a></p>
     </div>
   );
 
