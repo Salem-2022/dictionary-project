@@ -11,14 +11,14 @@ export default function Meaning(props) {
         if (index < 3){
         return (
         
-          <div key={index}>
+          <section key={index}>
              
-              <strong>Definition:</strong> {definition.definition}
+              <strong>Definition :</strong> {definition.definition}
               <br />
-              <em className="text-muted">Example:{definition.example}</em> 
+              <em className="text-muted">Example :{definition.example}</em> 
               <br />
           
-            </div>
+            </section>
           
         );
         } else { 

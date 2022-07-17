@@ -5,13 +5,16 @@ export default function Synonym(props) {
     return (
       <div className="Synonym">
         <strong>Synonyms :</strong>
+        <ul>
         {props.synonym.map(function (synonym, index) {
           return (
-            <span key={index} className="p-2 m-2 border rounded">
+
+            <li key={index} className="p-1 m-2 border rounded d-inline-block" >
               {synonym}
-            </span>
+            </li>
           );
         })}
+        </ul>
       </div>
     );
   } else {

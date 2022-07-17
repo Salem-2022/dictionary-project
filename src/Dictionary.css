@@ -1,8 +1,9 @@
 .Dictionary {
   text-align: left;
-  max-width: 80%;
+  max-width: 70%;
   margin: 0 auto;
   background-color: rgb(255, 255, 255);
+  box-shadow: 1px 10px 8px 5px rgb(176, 176, 185);
   
 }
 
@@ -10,4 +11,8 @@
   max-width:70%;
   margin: 0 auto;
   height: 40px;
+}
+.Dictionary section{
+  padding:10px 30px;
+
 }

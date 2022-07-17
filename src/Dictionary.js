@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ImageOfSearchedWord from "./ImageOfSearchedWord"
 import ResponseData from "./ResponseData";
 import Photos from "./Photos";
 
@@ -9,10 +10,11 @@ import Photos from "./Photos";
 import "./Dictionary.css";
 
 export default function Dictionary() {
-  let [searchedWord, setSearchedWord] = useState("Flower");
+  let [searchedWord, setSearchedWord] = useState("Flowers");
   let [responseData, setResponseData] = useState("");
   let [loaded, setLoaded] = useState(false);
   let [photos, setPhotos] = useState("");
+  let [photo, setPhoto] = useState("");
 
   
   function handleDictionaryResponse(response) {
@@ -20,7 +22,10 @@ export default function Dictionary() {
     setResponseData(response.data[0]);
     
   }
-  function handlePexelResponse(response){
+  function handlePexelPhotoResponse(response){
+    setPhoto(response.data.photos);
+  }
+  function handlePexelPhotosResponse(response){
     setPhotos(response.data.photos);
   }
 function search(){
@@ -28,11 +33,18 @@ function search(){
     axios.get(apiUrl).then(handleDictionaryResponse);
     
     let pexelApiKey="563492ad6f917000010000018264f965bdbf4f75b908a0fafc52414e";
-    let pexelApiUrl=`https://api.pexels.com/v1/search?query=${searchedWord}&per_page=9`;
+    let pexelPhotosApiUrl=`https://api.pexels.com/v1/search?query=${searchedWord}&per_page=9`;
+    
     let headers={"Authorization" : `Bearer ${pexelApiKey}`};
-    axios.get(pexelApiUrl,{ headers:headers}).then(handlePexelResponse);
+    axios.get(pexelPhotosApiUrl,{ headers:headers}).then(handlePexelPhotosResponse);
+   
+    let pexelPhotoApiUrl=`https://api.pexels.com/v1/search?query=${searchedWord}&per_page=1`;
+    axios.get(pexelPhotoApiUrl,{ headers:headers}).then(handlePexelPhotoResponse);
+  
     return "searching";
+    
 }
+
   function formSubmit(event) {
     event.preventDefault();
     search();
@@ -47,12 +59,15 @@ function search(){
   }
   
   if(loaded){
+    
   return (
-    <div className="Dictionary border rounded">
+    <div className="Dictionary border rounded"> 
+    <section  className="rounded">
+      <ImageOfSearchedWord photo={photo}/>
+      
       <form className="container form-group" onSubmit={formSubmit}>
         
-        <div className="row mt-5">
-          <div className="col">
+        
         <input
           type="search"
           className="form-control"
@@ -60,10 +75,9 @@ function search(){
           placeholder=" 🔍 Search for a word"
         />
 
-        </div> 
-         </div>
+       
       </form>
-
+      </section>
       <ResponseData responseData={responseData} />
       <Photos photos={photos} />
      
